@@ -3,28 +3,28 @@ class Counter extends Component {
     state = {
         count:0,
         text:"Zero",
-        // imageUrl:"https://picsum.photos/200"
     };
-    // style={
-    //     fontSize:50,
-    //     color:"red",
-    //     fontWeight:"bold",
-    // };
+
     render() { 
+
+        let classes = this.getBadgeClasses(); 
+
         return (
         <div>
-            <span style={{
-                fontSize:30,
-            }} className="badge badge-secondary m-2">
-                {this.state.text}
-            </span>
+            <span className={classes}> {this.formatCount()} </span>
             <button className="btn btn-secondary btn-sm">Increment</button>
         </div>
         );
     }
+    getBadgeClasses() {
+        let classes = "badge m-2 bg-";
+        classes += (this.state.count === 0) ? "warning" : "primary";
+        return classes;
+    }
+
     formatCount(){
         const {count } = this.state;
-        return count ===0? <h1>Zero</h1> :count;
+        return count ===0? "Zero" :count;
     }
 }
  
