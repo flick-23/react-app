@@ -21,17 +21,19 @@ class Counter extends Component {
     }
 
     //binding the event handler
-    handleIncrement = () => {
+    handleIncrement = (product) => {
+        console.log(product);
         this.setState({count: this.state.count+1})         //this tell react that there has been a change 
     }
 
+    
     render() { 
         let classes = this.getBadgeClasses(); 
 
         return (
         <div>
             <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
-            <button onClick={this.handleIncrement} className="btn btn-secondary btn-sm">Increment</button>
+            <button onClick={() => this.handleIncrement(product)} className="btn btn-secondary btn-sm">Increment</button>
         </div>
         );
     }
