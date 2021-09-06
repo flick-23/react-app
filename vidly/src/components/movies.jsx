@@ -8,58 +8,41 @@ class Movies extends Component{
     };
 
     handleDelete = movie =>{
-        deleteMovie(movie);
+        const movies = this.state.movies.filter( m=> m._id !== movie._id);
+        this.setState({movies});
     }
-    renderMovies(){
-        if(this.state.movies.length ===0) return (<p>No movies</p>);
-        return (
-             <div className="row row-cols-auto" style={{
-                    fontSize:20,
-                }}>
-                   <div className="col-md-2">{this.state.movies.map(movieTitle =><p key={movieTitle}>{movieTitle.title}</p>)}</div>
-                    <div className="col-md-2">{this.state.movies.map(movieGenre =><p key={movieGenre}>{movieGenre.genre.name}</p>)}</div>
-                    <div className="col-md-2">{this.state.movies.map(inStock =><p key = {inStock}>{inStock.numberInStock}</p>)}</div>
-                    <div className="col-md-2">{this.state.movies.map(rate =><p key={rate}>{rate.dailyRentalRate}</p>)}</div>
-                    <div className="col-md-2">
-                    {
-                        this.state.movies.map( del =>
-                        <p style={{
-                            marginBottom:12,
-                        }}>
-                            <button onClick={this.handleDelete(del._id)} className="btn btn-sm btn-danger">
-                                Delete
-                            </button>
-                        </p>
-                        )
-                    }
-                    </div>
-            </div>
-        )
-        
-    }
-    render(){
-        return(
-            <div className="container">
-            <p style={{
-                fontSize:30,
-                marginTop:30,
-            }}>Showing <span>{this.state.movies.length}</span> movies in the database</p>
     
-            {this.state.movies.lenght===0 && 'No Movies'}
-            <hr></hr>
-                <div className="row row-cols-auto" style={{
-                    fontWeight:"bold",
-                    fontSize:20,
-                }}>
-                    <div className="col-md-2">Title</div>
-                    <div className="col-md-2">Genre</div>
-                    <div className="col-md-2">Stock</div>
-                    <div className="col-md-2">Rate</div>
-                    <div className="col-md-2"></div>
-                </div>
-            <hr></hr>
-            {this.renderMovies()}
-            </div>
+    render(){
+        const { length : count } = this.state.movies;
+        if(this.state.movies.length === 0) return <p>There are no movies in the database</p>
+
+        return(
+            <React.Fragment>
+                <p>Showing {count} movies in the database</p>
+                <table className="table">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Genre</th>
+                            <th>Stock</th>
+                            <th>Rate</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.state.movies.map(movie=>
+                            <tr key ={movie._id}>
+                                <td>{movie.title}</td>
+                                <td>{movie.genre.name}</td>
+                                <td>{movie.numberInStock}</td>
+                                <td>{movie.dailyRentalRate}</td>
+                                <td><button className="btn btn-sm btn-danger" onClick={()=>this.handleDelete(movie)}>Delete</button></td>
+                            </tr>
+                        )}
+                    </tbody>
+                </table>
+            </React.Fragment>
+            
         )
     }
 };
