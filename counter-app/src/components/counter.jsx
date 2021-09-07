@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 class Counter extends Component {
     state = {
-        count:0,
+        count:this.props.value,
         text:"Zero",
         tags:[]
     };
@@ -29,7 +29,7 @@ class Counter extends Component {
     
     render() { 
         let classes = this.getBadgeClasses(); 
-
+        console.log('props',this.props);    //properties of the props obj
         return (
         <div>
             <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
