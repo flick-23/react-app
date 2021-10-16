@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 class Counter extends Component {
     state = {
-        count:this.props.value,
+        // prefix "value" with "counter.id"
+        count:this.props.counter.value,
         text:"Zero",
         tags:[]
     };
@@ -36,7 +37,9 @@ class Counter extends Component {
             <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
             <button onClick={() => this.handleIncrement(12)} className="btn btn-secondary btn-sm">Increment</button>
             {/* Raise an event here called as onDelete */}
-            <button onClick={this.props.onDelete} className="btn btn-danger btn-secondary btn-sm">Delete</button>
+           
+           {/* update prefix "id" with "counter.id" because id no more exists as it's replaced with whole counter obj */}
+            <button onClick={()=>this.props.onDelete(this.props.counter.id)} className="btn btn-danger btn-secondary btn-sm">Delete</button>
         </div>
         );
     }
