@@ -20,6 +20,18 @@ class Counters extends React.Component {
         this.setState({counters: newCounters});
     };
 
+    handleIncrement = counter =>{
+        // console.log(counter)
+        // do not update state directly instead create a new counters array and let react update the state
+
+        //objects in new counters array will have same values 
+        const counters = [...this.state.counters];
+        const index = counters.indexOf(counter);
+        counters[index] = {...counter};
+        counters[index].value++;
+        this.setState({counters:counters});
+    }
+
     //creating new array of counters and set state
     handleReset = () =>{
         const newCounters = this.state.counters.map(c=>{
@@ -39,6 +51,8 @@ class Counters extends React.Component {
             <Counter 
                 key={counter.id} 
                 onDelete={this.handleDelete} 
+                // now also handle onIncrement
+                onIncrement = {this.handleIncrement}
                 // removing id and value and instead adding the whole counter object so that if i add anything in the counter object in future it will automatically be added here
                 counter={counter}
             />
