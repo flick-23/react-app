@@ -22,6 +22,7 @@ class Counter extends Component {
 
     //binding the event handler
     handleIncrement = product => {
+        // this.props.value = 0;  React does not allow to change properties of props object, this will throw error 
         console.log(product);
         this.setState({count: this.state.count+1})         //this tell react that there has been a change 
     }
@@ -32,7 +33,6 @@ class Counter extends Component {
         console.log('props',this.props);    //properties of the props obj
         return (
         <div>
-        <h4>{this.props.id}</h4>
             <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
             <button onClick={() => this.handleIncrement(12)} className="btn btn-secondary btn-sm">Increment</button>
         </div>
