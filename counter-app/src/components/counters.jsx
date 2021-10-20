@@ -2,57 +2,21 @@ import React, { Component } from 'react';
 import Counter from './counter';
 class Counters extends React.Component {
 
-    state = {
-        counters:[
-            {id:1, value:0},
-            {id:2, value:1},
-            {id:3, value:2},
-            {id:4, value:3},
-        ]
-    };
-    //handle the onDelete event here
-    handleDelete = (counterId) =>{
-        // console.log("Event handler called!",counterId);
-        //filter the counters array to have values that are not equal to the id passed
-        const newCounters = this.state.counters.filter(c=> c.id != counterId);
-        //update the state of counters to the newCounters 
-        //overwrite counters property with newCounters constant
-        this.setState({counters: newCounters});
-    };
-
-    handleIncrement = counter =>{
-        // console.log(counter)
-        // do not update state directly instead create a new counters array and let react update the state
-
-        //objects in new counters array will have same values 
-        const counters = [...this.state.counters];
-        const index = counters.indexOf(counter);
-        counters[index] = {...counter};
-        counters[index].value++;
-        this.setState({counters:counters});
-    }
-
-    //creating new array of counters and set state
-    handleReset = () =>{
-        const newCounters = this.state.counters.map(c=>{
-            c.value = 0;
-            return c});
-        this.setState({counters : newCounters});
-    };
-
+    //removed the state and sent it to its parent component that is App
     render() { 
         return (<div>
                 <button 
-                onClick={this.handleReset}
+                // since handleReset and all are removed i must give reference to it using props
+                onClick={this.props.onReset}
                 className="btn btn-primary btn-sm m-2">
                     Reset
                 </button>
-            {this.state.counters.map(counter => 
+            {this.props.counters.map(counter => 
             <Counter 
                 key={counter.id} 
-                onDelete={this.handleDelete} 
+                onDelete={this.props.onDelete} 
                 // now also handle onIncrement
-                onIncrement = {this.handleIncrement}
+                onIncrement = {this.props.onIncrement}
                 // removing id and value and instead adding the whole counter object so that if i add anything in the counter object in future it will automatically be added here
                 counter={counter}
             />
