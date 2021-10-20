@@ -21,7 +21,8 @@ class Counter extends Component {
     //therefore, removed handleIncrement 
 
     
-    render() { 
+    render() {
+        console.log("Counter - Rendered!"); 
         let classes = this.getBadgeClasses(); 
         console.log('props.counter',this.props.counter);    //properties of the props obj
         return (

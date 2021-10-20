@@ -14,6 +14,19 @@ class App extends Component {
         {id:4, value:3},
     ]
   };
+
+  //STEP-1 add constructor
+  constructor(props){    //called only once when instance of class is created
+    super(props);    //we need to call constructor of parent class using super
+    console.log("App-Constructor"); 
+    // this.state = this.props.something;
+  }
+  //STEP -2 -this method is called after our component is rendered into the DOM - make Ajax calls to get data from the server
+  componentDidMount(){
+    //Ajax Calls 
+    console.log("App-Mounted")
+  }
+
   //handle the onDelete event here
   handleDelete = (counterId) =>{
     // console.log("Event handler called!",counterId);
@@ -44,7 +57,9 @@ class App extends Component {
     this.setState({counters : newCounters});
   };
   
+  //Step 3 - RENDER
   render(){
+    console.log("App rendered!");
   return (
     <React.Fragment>
     <NavBar totalCounters={this.state.counters.filter(c=> c.value>0).length} />

@@ -4,6 +4,7 @@ class Counters extends React.Component {
 
     //removed the state and sent it to its parent component that is App
     render() { 
+        console.log("Counters = Rendered");
         //Destructuring objects to make code look cleaner
         const {onReset,counters,onDelete,onIncrement} = this.props;
         return (<div>
