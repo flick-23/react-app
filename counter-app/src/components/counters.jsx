@@ -4,19 +4,21 @@ class Counters extends React.Component {
 
     //removed the state and sent it to its parent component that is App
     render() { 
+        //Destructuring objects to make code look cleaner
+        const {onReset,counters,onDelete,onIncrement} = this.props;
         return (<div>
                 <button 
                 // since handleReset and all are removed i must give reference to it using props
-                onClick={this.props.onReset}
+                onClick={onReset}
                 className="btn btn-primary btn-sm m-2">
                     Reset
                 </button>
-            {this.props.counters.map(counter => 
+            {counters.map(counter => 
             <Counter 
                 key={counter.id} 
-                onDelete={this.props.onDelete} 
+                onDelete={onDelete} 
                 // now also handle onIncrement
-                onIncrement = {this.props.onIncrement}
+                onIncrement = {onIncrement}
                 // removing id and value and instead adding the whole counter object so that if i add anything in the counter object in future it will automatically be added here
                 counter={counter}
             />
