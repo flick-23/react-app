@@ -42,15 +42,20 @@ class Counter extends Component {
         let classes = this.getBadgeClasses(); 
         console.log('props.counter',this.props.counter);    //properties of the props obj
         return (
-        <div>
-            <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
-
-            {/* update this the way we created delete button  */}
-            <button onClick={()=> this.props.onIncrement(this.props.counter)} className="btn btn-secondary btn-sm">Increment</button>
-
-            {/* Raise an event here called as onDelete */}
-           {/* update prefix "id" with "counter.id" because id no more exists as it's replaced with whole counter obj */}
-            <button onClick={()=>this.props.onDelete(this.props.counter.id)} className="btn btn-danger btn-secondary btn-sm">Delete</button>
+        <div className="row">
+            <div className="col-1">
+                <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
+            </div>
+            <div className="col">
+                 {/* update this the way we created delete button  */}
+                <button onClick={()=> this.props.onIncrement(this.props.counter)} className="btn btn-secondary btn-sm m-2"> + </button>
+                <button onClick={()=> this.props.onDecrement(this.props.counter)} className="btn btn-secondary btn-sm m-2"
+                    disabled={this.props.counter.value==0? 'disabled':''}
+                > - </button>
+                 {/* Raise an event here called as onDelete */}
+                {/* update prefix "id" with "counter.id" because id no more exists as it's replaced with whole counter obj */}
+                    <button onClick={()=>this.props.onDelete(this.props.counter.id)} className="btn btn-danger btn-secondary btn-sm m-2">Delete</button>
+            </div>
         </div>
         );
     }

@@ -20,6 +20,7 @@ class Counters extends React.Component {
                 onDelete={onDelete} 
                 // now also handle onIncrement
                 onIncrement = {onIncrement}
+                onDecrement ={this.props.onDecrement}
                 // removing id and value and instead adding the whole counter object so that if i add anything in the counter object in future it will automatically be added here
                 counter={counter}
             />
