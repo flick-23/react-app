@@ -9,6 +9,13 @@ class Counter extends Component {
             //ajax call and get new data from the server 
         }
     }
+
+    //this method is called just before a component is unmounted
+    //clean timers listeners etc using this, otherwise we will end up having memory leaks 
+    componentWillUnmount(){
+        console.log("Couter - Unmounted!");
+    }
+
     //deleted state property
 
     // constructor(){
