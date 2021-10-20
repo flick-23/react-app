@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
 class Counter extends Component {
+    // this method is called after the component is updated  
+    componentDidUpdate(prevProps, prevState){
+        //can make ajax req to get data from server
+        console.log("PrevPros", prevProps);
+        console.log("PrevState", prevState);
+        if(prevProps.counter.value !== this.props.counter.value){
+            //ajax call and get new data from the server 
+        }
+    }
     //deleted state property
 
     // constructor(){
