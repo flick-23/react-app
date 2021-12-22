@@ -7,25 +7,33 @@ class LoginForm extends Component {
   };
 
   validate = () => {
-    return { username: "Username is required." };
+    const errors = {};
+
+    const { account } = this.state;
+    if (account.username.trim() === "")
+      errors.username = "Username is required.";
+    if (account.password.trim() === "")
+      errors.password = "Password is required";
+
+    return Object.keys(errors).length === 0 ? null : errors;
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+
+    const errors = this.validate();
+    console.log(errors);
+    this.setState({ errors });
+    if (errors) return;
+
+    //call the server
+    console.log("Submitted");
   };
 
   handleChange = ({ currentTarget: input }) => {
     const account = { ...this.state.account };
     account[input.name] = input.value;
     this.setState({ account });
-  };
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-
-    const username = this.username.current.value;
-    const errors = this.validate();
-    this.setState({ errors });
-    if (errors) return;
-
-    //call the server
-    console.log("Submitted");
   };
 
   render() {
@@ -41,7 +49,7 @@ class LoginForm extends Component {
             onChange={this.handleChange}
           />
           <Input
-            name="passowrd"
+            name="password"
             value={account.password}
             label="Password"
             onChange={this.handleChange}
