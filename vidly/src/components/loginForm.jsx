@@ -22,6 +22,13 @@ class LoginForm extends Component {
     return errors;
   };
 
+  validateProperty = ({ name, value }) => {
+    const obj = { [name]: value };
+    const schema = { [name]: this.schema[name] };
+    const { error } = Joi.validate(obj, schema);
+    return error ? error.details[0].message : null;
+  };
+
   handleSubmit = (e) => {
     e.preventDefault();
 
@@ -34,13 +41,6 @@ class LoginForm extends Component {
     console.log("Submitted");
   };
 
-  validateProperty = ({ name, value }) => {
-    const obj = { [name]: value };
-    const schema = { [name]: this.schema[name] };
-    const { error } = Joi.validate(obj, schema);
-    return error ? error.details[0].message : null;
-  };
-
   handleChange = ({ currentTarget: input }) => {
     const errors = { ...this.state.errors };
     const errorMessage = this.validateProperty(input);
@@ -49,6 +49,7 @@ class LoginForm extends Component {
 
     const account = { ...this.state.account };
     account[input.name] = input.value;
+    
     this.setState({ account, errors });
   };
 
