@@ -7,6 +7,7 @@ import Pagination from "./common/pagination";
 import { paginate } from "../utils/paginate";
 import MoviesTable from "./moviesTable";
 import _ from "lodash";
+import { Outlet } from "react-router-dom";
 
 class Movies extends Component {
   state = {
@@ -100,6 +101,7 @@ class Movies extends Component {
             currentPage={currentPage}
           />
         </div>
+        <Outlet />
       </div>
     );
   }
