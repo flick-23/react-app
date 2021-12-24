@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import axios from "axios";
 
+const apiEndpoint = "https://jsonplaceholder.typicode.com/posts";
 class App extends Component {
   state = {
     posts: [],
@@ -9,14 +10,15 @@ class App extends Component {
 
   async componentDidMount() {
     //pending > resolved (success) OR rejected (failure)
-    const { data: posts } = await axios.get(
-      "https://jsonplaceholder.typicode.com/posts"
-    );
+    const { data: posts } = await axios.get(apiEndpoint);
     this.setState({ posts });
   }
 
-  handleAdd = () => {
-    console.log("Add");
+  handleAdd = async () => {
+    const obj = { title: "a", body: "b" };
+    const { data: post } = await axios.post(apiEndpoint, obj);
+    const posts = [post, ...this.state.posts];
+    this.setState({ posts });
   };
 
   handleUpdate = (post) => {
@@ -29,7 +31,7 @@ class App extends Component {
 
   render() {
     return (
-      <React.Fragment>
+      <div>
         <button className="btn btn-primary" onClick={this.handleAdd}>
           Add
         </button>
@@ -65,7 +67,7 @@ class App extends Component {
             ))}
           </tbody>
         </table>
-      </React.Fragment>
+      </div>
     );
   }
 }
