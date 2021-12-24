@@ -34,9 +34,19 @@ class App extends Component {
   };
 
   handleDelete = async (post) => {
-    await axios.delete(apiEndpoint + "/" + post.id);
+    const originalPosts = this.state.posts; //reference to original state
+
+    //update UI
     const posts = this.state.posts.filter((p) => p.id !== post.id);
     this.setState({ posts });
+    //Update server in try catch block
+    try {
+      await axios.delete(apiEndpoint + "/" + post.id);
+      // throw new Error(""); just for demostrating errors
+    } catch (ex) {
+      alert("Something failed while deleting a post!");
+      this.setState({ posts: originalPosts });
+    }
   };
 
   render() {
